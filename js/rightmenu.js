@@ -92,7 +92,7 @@ window.oncontextmenu = function(event) {
         
         $rightMenuMusicToggle.style.display = "block";
         // 检查是否需要复制 是否有选中文本
-        if (window.getSelection()) {
+        if (window.getSelection().toString()) {
             selectTextNow = window.getSelection().toString();
             pluginMode = true;
             $rightMenuCopyText.style.display = "block";
