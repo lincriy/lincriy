@@ -449,10 +449,9 @@ toggleButton = document.getElementById("menu-css-toggle");
 function updateButtonText() {
     if (bodyElement.classList.contains("no-animation")) {
         toggleButton.textContent = "开启所有动效";
-        btf.snackbarShow("系统设置：已暂停所有动效 GPU 狂笑");
+        btf.snackbarShow("系统设置：已暂停所有动效");
     } else {
         toggleButton.textContent = "暂停所有动效";
-        btf.snackbarShow("提示：已开启所有动效 GPU 狂啸");
     }
 }
 
@@ -469,6 +468,19 @@ controlButton.onclick= function() {
     updateButtonText();
     rm.hideRightMenu();
 };
+
+if (/Mobi|Android|iPhone/i.test(navigator.userAgent)) {
+    
+    // 当前设备是移动设备
+    if (!bodyElement.classList.contains("no-animation")){
+        setTimeout(() => {
+            // 切换<body>元素的no-animation类
+            bodyElement.classList.toggle("no-animation");
+            // 更新按钮的文本
+            updateButtonText();
+        }, 5000);
+    }
+}
 
 addRightMenuClickEvent();
 
