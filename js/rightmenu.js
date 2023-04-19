@@ -477,7 +477,7 @@ if (/Mobi|Android|iPhone/i.test(navigator.userAgent)) {
             // 切换<body>元素的no-animation类
             bodyElement.classList.toggle("no-animation");
             // 更新按钮的文本
-            updateButtonText();
+            btf.snackbarShow("省电助手：已暂停所有动效");
         }, 5000);
     }
 }
