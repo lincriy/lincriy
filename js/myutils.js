@@ -3,7 +3,7 @@ var defaulter = {
     downloadImage: function(e, dfas) {
         rm.hideRightMenu(),
         0 == rm.downloadimging ? (rm.downloadimging = !0,
-        btf.snackbarShow("正在下载中，请稍后", !1, 1e4),
+        btf.snackbarShow("正在下载中，请稍后"),
         setTimeout(function() {
             var o = new Image;
             o.setAttribute("crossOrigin", "anonymous"),
@@ -23,7 +23,7 @@ var defaulter = {
             o.src = e,
             btf.snackbarShow("图片已添加盲水印，请遵守版权协议"),
             rm.downloadimging = !1
-        }, "10000")) : btf.snackbarShow("有正在进行中的下载，请稍后再试")
+        }, "1")) : btf.snackbarShow("有正在进行中的下载，请稍后再试")
     },
     musicToggle: function() {
         var e = !(0 < arguments.length && void 0 !== arguments[0]) || arguments[0];

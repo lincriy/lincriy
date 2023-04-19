@@ -2333,7 +2333,7 @@ pre[class*='language-'] pre > code.highlight {
   }
 }
 .layout > div:first-child {
-  width: 74%;
+  width: 100%;
   -webkit-transition: all 0.3s;
   -moz-transition: all 0.3s;
   -o-transition: all 0.3s;

@@ -1,5 +1,8 @@
-let rm = {};
-let selectTextNow;
+rm = {};
+selectTextNow = "";
+// 切换<body>元素的no-animation类
+document.body.classList.remove("no-animation");
+btf.snackbarShow("提示：已开启所有动画 GPU 狂啸");
 $(function () {
     
 // 初始化函数
@@ -15,7 +18,6 @@ for (let i = 0; i < imgElements.length; i++) {
 
 // 显示菜单
 rm.showRightMenu = function(isTrue, x=0, y=0) {
-    console.info(x, y)
     let rightMenu = document.getElementById("rightMenu");
     rightMenu.style.top = x + "px";
     rightMenu.style.left = y + "px";
@@ -178,16 +180,15 @@ rm.downloadimging = false;
 
 // 复制图片到剪贴板
 rm.writeClipImg = function(imgsrc) {
-    console.log("按下复制");
     rm.hideRightMenu();
-    btf.snackbarShow("正在下载中，请稍后", false, 10000);
+    btf.snackbarShow("正在下载中，请稍后");
     if (rm.downloadimging == false) {
         rm.downloadimging = true;
         setTimeout(function() {
             copyImage(imgsrc);
             btf.snackbarShow("复制成功！图片已添加盲水印，请遵守版权协议");
             rm.downloadimging = false;
-        }, "10000");
+        }, "1");
     }
 }
 ;
@@ -294,7 +295,7 @@ rm.rightmenuCopyText = async function(txt) {
 rm.copyPageUrl = function() {
     var url = window.location.href;
     rm.copyUrl(url);
-    btf.snackbarShow("复制本页链接地址成功", false, 2000);
+    btf.snackbarShow("复制本页链接地址成功");
     rm.hideRightMenu();
 }
 ;
@@ -302,7 +303,7 @@ rm.copyPageUrl = function() {
 rm.sharePage = function() {
     var content = window.location.href;
     rm.copyUrl(url);
-    btf.snackbarShow("复制本页链接地址成功", false, 2000);
+    btf.snackbarShow("复制本页链接地址成功");
     rm.hideRightMenu();
 };
 
@@ -318,10 +319,10 @@ rm.readClipboard = function() {
 
 // 百度搜索
 rm.searchBaidu = function() {
-    btf.snackbarShow("即将跳转到Bing搜索", false, 2000);
+    btf.snackbarShow("即将跳转到Bing搜索");
     setTimeout(function() {
         window.open("https://www.bing.com/search?q=" + selectTextNow);
-    }, "2000");
+    }, "1");
     rm.hideRightMenu();
 }
 ;
@@ -423,13 +424,50 @@ function addRightMenuClickEvent() {
     document.getElementById("menu-music-copyMusicName").addEventListener("click", function() {
         try{
         rm.rightmenuCopyText(defaulter.musicGetName());
-        btf.snackbarShow("复制歌曲名称成功", false, 3000);
+        btf.snackbarShow("复制歌曲名称成功");
     } catch (err) {
         btf.snackbarShow("复制失败，没有权限！");
     }
     });
 
+    GLOBAL_CONFIG.Snackbar.position = "bottom-center"
+
+    // 获取<body>元素
+    var bodyElement = document.body;
+
+    // 获取用于控制动画的按钮
+    var controlButton = document.getElementById("menu-css-stop");
+    var toggleButton = document.getElementById("menu-css-toggle");
+    // 定义一个函数，用于更新按钮的文本
+    function updateButtonText() {
+        if (bodyElement.classList.contains("no-animation")) {
+            toggleButton.textContent = "开启所有动画";
+            btf.snackbarShow("系统设置：已暂停所有动画 GPU 狂笑");
+        } else {
+            toggleButton.textContent = "暂停所有动画";
+            btf.snackbarShow("提示：已开启所有动画 GPU 狂啸");
+        }
+    }
+
+
+    // 初始化按钮的文本
+    updateButtonText();
+
+    // 为按钮添加点击事件监听器
+    controlButton.addEventListener("click", function() {
+        // 切换<body>元素的no-animation类
+        bodyElement.classList.toggle("no-animation");
+        // 更新按钮的文本
+        updateButtonText();
+        rm.hideRightMenu();
+    });
+
+
 }
 
+
+
+
 addRightMenuClickEvent();
+btf.snackbarShow("提示：已开启所有动画 GPU狂啸（右键菜单可关闭）",);
 })
