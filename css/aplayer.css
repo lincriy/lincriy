@@ -116,12 +116,13 @@
   box-shadow: none;
 }
 
-/* 導航欄音樂 */
+/* 導航欄音樂 
 @media screen and (max-width: 1300px) {
   #nav-music {
     display: none !important;
   }
 }
+*/
 
 #nav-music {
   display: flex;
